@@ -22,7 +22,7 @@ def get_transformer_chain():
         ]
     }}}}
 
-    Your result must be in Target JSON format.
+    Your response must be in Target JSON format.
 
     **Note:** Use only the provided data and never generate answers independently.
 

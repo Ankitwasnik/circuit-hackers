@@ -33,16 +33,13 @@ def get_results(user_question):
 
 def get_agent_response(agent_input):
     try:
-        chat_executor = get_nl2esq_agent()
+        nl2esq_executor = get_nl2esq_agent()
 
-        chat_result = chat_executor.invoke({"input": agent_input})
-        print(f"chat_result: {chat_result}")
+        nl2esq = nl2esq_executor.invoke({"input": agent_input})
+        print(f"nl2esq: {nl2esq}")
         api_response = {}
         try:
-            api_response = parser.parse(chat_result["output"])
-            # api_response = {
-            #     "answer": chat_result['output']
-            # }
+            api_response = parser.parse(nl2esq["output"])
         except Exception as e:
             print(f"error in response parsing | {e}")
             api_response = {"message": FAILURE_MESSAGE, "status": "FAILURE", "error": e}
@@ -50,5 +47,5 @@ def get_agent_response(agent_input):
         return api_response
 
     except Exception as e:
-        print(f"error in chat agent | {e}")
+        print(f"error in nl2esq agent | {e}")
         return {"message": FAILURE_MESSAGE, "status": "FAILURE", "error": str(e)}
