@@ -18,7 +18,7 @@ class LLMProvider:
 
 class _LLMFactory:
     providers = {
-        LLMProviders.OPENAI: OpenAILLM,
+        LLMProviders.OPENAI.value: OpenAILLM,
     }
 
     @staticmethod

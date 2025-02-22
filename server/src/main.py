@@ -2,13 +2,15 @@ import os
 import sys
 from fastapi import FastAPI
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../"))
+sys.path.append(project_root)
 
+from pydantic import BaseModel
 from dotenv import load_dotenv
 
 load_dotenv()
 
-from src.service.es_service import execute_batting_query
+from src.service.process_query import get_results
 
 app = FastAPI()
 
@@ -18,20 +20,13 @@ async def root():
     return {"message": "Hello World"}
 
 
+class QueryRequestData(BaseModel):
+    question: str
+
+
 @app.get("/query")
-async def query_batting():
-    return execute_batting_query(
-        query={
-            "size": 0,
-            "query": {"bool": {"filter": [{"term": {"Player": "Virat Kohli"}}]}},
-            "aggs": {
-                "yearwise_runs_scored": {
-                    "terms": {"field": "Year"},
-                    "aggs": {"total_runs": {"sum": {"field": "Runs"}}},
-                }
-            },
-        }
-    )
+async def query_batting(request_data: QueryRequestData):
+    return get_results(request_data.question)
 
 
 if __name__ == "__main__":
