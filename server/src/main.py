@@ -24,7 +24,7 @@ class QueryRequestData(BaseModel):
     question: str
 
 
-@app.get("/query")
+@app.post("/query")
 async def query_batting(request_data: QueryRequestData):
     return get_results(request_data.question)
 
