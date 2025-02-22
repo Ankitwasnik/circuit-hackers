@@ -28,6 +28,7 @@ def get_results(user_question):
         print(f"Error generating response: {e}")
         return {"message": FAILURE_MESSAGE, "status": "FAILURE", "error": str(e)}
 
+    result["status"] = "SUCCESS"
     return result
 
 
