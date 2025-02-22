@@ -2,6 +2,7 @@ import json
 
 from langchain_core.output_parsers import JsonOutputParser
 from src.agent.nl2esq import get_nl2esq_agent
+from src.chain.transform_response import get_transformer_chain
 
 parser = JsonOutputParser()
 FAILURE_MESSAGE = (
@@ -13,7 +14,21 @@ def get_results(user_question):
 
     response = get_agent_response(user_question)
 
-    return response
+    if response.get("status") == "FAILURE":
+        return response
+
+    try:
+        transformer_chain = get_transformer_chain()
+        result = transformer_chain.invoke(
+            {
+                "es_response": response.get("execution_result", "{}"),
+            }
+        )
+    except Exception as e:
+        print(f"Error generating response: {e}")
+        return {"message": FAILURE_MESSAGE, "status": "FAILURE", "error": str(e)}
+
+    return result
 
 
 def get_agent_response(agent_input):

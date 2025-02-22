@@ -14,6 +14,7 @@ from src.llm.llm_provider import LLMProvider
 from src.service.es_service import execute_query
 from data.few_shot_examples import examples
 
+
 def get_nl2esq_agent():
     system_prompt = """You are an agent designed to interact with a Elastic Search database. 
     Given an input question, create a search query in Elasticsearch DSL format, execute the query on the database using execute_query tool and based on the execution results provide output in the json format specified.
@@ -78,7 +79,7 @@ def get_few_shot_prompt(system_prompt) -> FewShotPromptTemplate:
 
     embeddings = LLMProvider.get_embedding_model()
     example_selector = SemanticSimilarityExampleSelector.from_examples(
-        examples=examples
+        examples,
         embeddings,
         FAISS,
         k=5,
