@@ -22,6 +22,7 @@ def get_nl2esq_agent():
     Unless the user specifies a specific number of examples they wish to obtain, always limit your query to at most 10 results. 
     You MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.
     DO NOT make query that can change db state (PUT, PATCH, POST, DELETE etc.).
+    You must only fetch the relevant data as per the question. For example, if the question is - "Who hit the most centuries in 2022?" your query should only fetch the player names and number of centuries.
     You must use execute_query tool to execute Elasticsearch queries and only respond to user's question based on the query execution results.
     
     There is one index available in the db: BATTING
