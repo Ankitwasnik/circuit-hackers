@@ -1,9 +1,16 @@
+import os
+import sys
 from fastapi import FastAPI
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+
 from dotenv import load_dotenv
-from server.src.service.es_service import execute_batting_query
+
+load_dotenv()
+
+from src.service.es_service import execute_batting_query
 
 app = FastAPI()
-load_dotenv()
 
 
 @app.get("/")
@@ -25,3 +32,10 @@ async def query_batting():
             },
         }
     )
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    port = os.getenv("API_PORT", 8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
