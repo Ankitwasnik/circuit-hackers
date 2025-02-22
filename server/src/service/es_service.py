@@ -1,18 +1,32 @@
-from elasticsearch import Elasticsearch
 import os
+from elasticsearch import Elasticsearch
+from langchain_core.tools import tool
 
-client = Elasticsearch(
-  os.getenv('ES_SERVER_URL'),
-  api_key=os.getenv('ES_API_KEY')
-)
+from src.utils.es_index import ESIndex
 
-BATTING_INDEX = os.getenv('ES_BATTING_INDEX_NAME')
+client = Elasticsearch(os.getenv("ES_SERVER_URL"), api_key=os.getenv("ES_API_KEY"))
+
 
 def get_client_info():
     return client.info()
 
-def execute_query(index, query):
-    return client.search(index=index, body=query)
+
+@tool
+def execute_query(index_key, query):
+    """
+    Execute a search query on a specified Elasticsearch index.
+
+    Args:
+        index_key (str): The key used to determine the Elasticsearch index.
+                         Must be one of ["BATTING", "BOWLING"].
+        query (dict): The search query in Elasticsearch DSL format.
+
+    Returns:
+        dict: The search results from Elasticsearch.
+    """
+    index_name = ESIndex.get_index(index_key)
+    return client.search(index=index_name, body=query)
+
 
 def execute_batting_query(query):
-    return execute_query(BATTING_INDEX, query)
+    return execute_query(ESIndex.BATTING, query)
