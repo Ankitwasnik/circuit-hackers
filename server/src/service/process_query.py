@@ -20,8 +20,7 @@ def get_agent_response(agent_input):
     try:
         chat_executor = get_nl2esq_agent()
 
-        agent_input_str = json.dumps(agent_input)
-        chat_result = chat_executor.invoke({"input": agent_input_str})
+        chat_result = chat_executor.invoke({"input": agent_input})
         print(f"chat_result: {chat_result}")
         api_response = {}
         try:
