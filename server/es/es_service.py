@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 import os
 
 client = Elasticsearch(
-  os.getenv('SERVER_URL'),
+  os.getenv('ES_SERVER_URL'),
   api_key=os.getenv('ES_API_KEY')
 )
 
