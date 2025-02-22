@@ -2,7 +2,7 @@ import os
 from elasticsearch import Elasticsearch
 from langchain_core.tools import tool
 
-from src.utils.es_index import ESIndex
+from src.util.es_index import ESIndex
 
 client = Elasticsearch(os.getenv("ES_SERVER_URL"), api_key=os.getenv("ES_API_KEY"))
 
