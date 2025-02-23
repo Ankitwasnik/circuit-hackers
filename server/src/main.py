@@ -1,6 +1,7 @@
 import os
 import sys
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../"))
 sys.path.append(project_root)
@@ -13,6 +14,18 @@ load_dotenv()
 from src.service.process_query import get_results
 
 app = FastAPI()
+
+# Get CORS origins from environment variables
+origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 @app.get("/")
