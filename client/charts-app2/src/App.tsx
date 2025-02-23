@@ -200,26 +200,55 @@ function App() {
           Circuit Hackers
         </div>
         <header className="text-center my-6">
-          <h1 className="text-3xl font-bold">
-            Dashboard with dynamic charts using natural language
-          </h1>
+          <h1 className="text-3xl font-bold">🏏 Welcome to Dashify</h1>
           <p className="text-gray-600">
-            Add widgets, input the data you want to see in natural language
+            Explore IPL player statistics dynamically using natural language.
           </p>
         </header>
         <section className="bg-gray-100 p-4 rounded shadow-md my-6">
-          <h2 className="text-2xl font-bold mb-2">
-            Understanding the IPL Dataset
-          </h2>
-          <p className="text-gray-700">
-            The dataset contains IPL player statistics across multiple years. It
-            includes metrics such as total runs scored (Runs), highest score
-            (HS), number of fifties (50) and hundreds (100), strike rate (SR),
-            and batting average (Avg). Additionally, it tracks boundaries hit
-            (4s and 6s), balls faced (BF), number of innings played (Inns),
-            matches played (Mat), and not-outs (NO). Each record is categorized
-            by year (Year) and player name (Player).
-          </p>
+          <h2 className="text-2xl font-bold mb-2">What Data is Available?</h2>
+          <div className="text-gray-700">
+            <p>
+              Each query is based on IPL player stats across multiple years. You
+              can ask about:
+            </p>
+            <ul className="list-disc pl-5">
+              <li>
+                <strong>Player Performance:</strong> Total runs scored, Highest
+                score in an innings, Number of fifties, and hundreds, Batting
+                average, Strike rate
+              </li>
+              <li>
+                <strong>Match & Innings Stats:</strong> Matches played, Innings
+                played, Not-outs, Balls faced
+              </li>
+              <li>
+                <strong>Boundaries & Hitting Power:</strong> 4s, 6s
+              </li>
+              <li>
+                <strong>Year-wise Performance:</strong> Stats categorized by
+                year
+              </li>
+            </ul>
+            <p className="mt-3 font-semibold">
+              🏆 Example Queries You Can Try:
+            </p>
+            <ul className="list-disc pl-5">
+              <li>Who hit the most sixes in 2021?</li>
+              <li>
+                How has the total number of fours and sixes changed over the
+                years?
+              </li>
+              <li>
+                Show total runs and average strike rate of Rohit Sharma over the
+                years.
+              </li>
+              <li>
+                How many times have players remained not out compared to the
+                total innings played each year?
+              </li>
+            </ul>
+          </div>
         </section>
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded"
