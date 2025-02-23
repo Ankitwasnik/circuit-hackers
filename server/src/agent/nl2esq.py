@@ -54,6 +54,8 @@ def get_nl2esq_agent():
         "error": "error message"
     }}
     ```
+
+    **Note:** Use only the provided data and never generate response independently.
     """
 
     few_show_prompt = get_few_shot_prompt(system_prompt)
